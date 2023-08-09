@@ -1,4 +1,4 @@
-package com.example.translater.util
+package com.example.translator.util
 
 import android.content.Context
 import androidx.annotation.StringRes

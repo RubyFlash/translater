@@ -1,4 +1,4 @@
-package com.example.translater.ui.theme
+package com.example.translator.ui.theme
 
 import android.app.Activity
 import android.os.Build
