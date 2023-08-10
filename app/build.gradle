@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.translater'
+    namespace 'com.example.translator'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.translater"
+        applicationId "com.example.translator"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -55,6 +55,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.45"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     kapt "com.google.dagger:hilt-compiler:2.45"
 
     //Splash Screen API

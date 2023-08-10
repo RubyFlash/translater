@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.translator.presentation.screens.HomeScreen
-import com.example.translator.presentation.screens.WelcomeScreen
+import androidx.navigation.navigation
+import com.example.translator.presentation.screen.HomeScreen
+import com.example.translator.presentation.screen.OnboardingScreen
 
 @Composable
 fun SetupNavGraph(
@@ -16,11 +17,22 @@ fun SetupNavGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screen.Welcome.route) {
-            WelcomeScreen(navController = navController)
+        navigation(
+            startDestination = NavRoute.OnBoarding.OnBoardingScreen.route,
+            route = NavRoute.OnBoarding.route
+        ) {
+            composable(route = NavRoute.OnBoarding.OnBoardingScreen.route) {
+                OnboardingScreen(navController = navController)
+            }
         }
-        composable(route = Screen.Home.route) {
-            HomeScreen()
+
+        navigation(
+            startDestination = NavRoute.Home.HomeScreen.route,
+            route = NavRoute.Home.route
+        ) {
+            composable(route = NavRoute.Home.HomeScreen.route) {
+                HomeScreen()
+            }
         }
     }
 }

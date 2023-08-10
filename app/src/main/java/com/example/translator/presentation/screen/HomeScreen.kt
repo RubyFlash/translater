@@ -1,4 +1,4 @@
-package com.example.translator.presentation.screens
+package com.example.translator.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

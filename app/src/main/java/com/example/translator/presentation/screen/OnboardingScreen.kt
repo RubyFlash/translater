@@ -34,15 +34,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.translator.R
-import com.example.translator.presentation.viewmodel.WelcomeScreenViewModel
+import com.example.translator.presentation.viewmodel.OnboardingScreenViewModel
 import com.example.translator.util.OnBoardingPage
 import com.example.translator.util.UIText
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun WelcomeScreen(
+fun OnboardingScreen(
     navController: NavHostController,
-    welcomeScreenViewModel: WelcomeScreenViewModel = hiltViewModel()
+    onboardingScreenViewModel: OnboardingScreenViewModel = hiltViewModel()
 ) {
     val pages = listOf(
         OnBoardingPage.First,
@@ -79,7 +79,7 @@ fun WelcomeScreen(
             }
         }
         FinishButton(modifier = Modifier, pagerState = pagerState) {
-            welcomeScreenViewModel.saveOnBoardingState(completed = true)
+            onboardingScreenViewModel.saveOnBoardingState(completed = true)
             navController.popBackStack()
             navController.navigate("home") {
                 popUpTo("boarding") {
@@ -162,7 +162,7 @@ fun FirstOnBoardingScreenPreview() {
 
 @Composable
 @Preview(showSystemUi = true)
-fun WelcomeScreenPreview() {
+fun OnboardingScreenPreview() {
     Column(
         modifier = Modifier
             .fillMaxSize(),
