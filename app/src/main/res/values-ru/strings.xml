@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Translator</string>
+    <string name="first_title">Переводите Незнакомые Слова</string>
+    <string name="first_description">Изучайте слова и общайтесь со всем миром с помощью нашего приложения.</string>
+    <string name="second_title">Группируйте Слова</string>
+    <string name="second_description">В Translator, вы можете составлять из переведённых слов аккуратные списки.</string>
+    <string name="third_title">Проверте Свой Словарный Запас</string>
+    <string name="third_description">Готовы проверить свои знания? Проходите тест по сохраненным словам. Закрепляйте новые слова в памяти и вспоминайте старые.</string>
+    <string name="finish_btn">Начать</string>
+</resources>

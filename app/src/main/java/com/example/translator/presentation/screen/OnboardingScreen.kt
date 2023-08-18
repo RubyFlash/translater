@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -29,12 +28,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.translator.R
+import com.example.translator.presentation.navigation.NavRoute
 import com.example.translator.presentation.viewmodel.OnboardingScreenViewModel
+import com.example.translator.ui.theme.Roboto
+import com.example.translator.ui.theme.TranslatorTheme
 import com.example.translator.util.OnBoardingPage
 import com.example.translator.util.UIText
 
@@ -55,6 +59,7 @@ fun OnboardingScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         HorizontalPager(
+            modifier = Modifier.weight(10f),
             pageCount = 3,
             state = pagerState
         ) { position ->
@@ -62,27 +67,29 @@ fun OnboardingScreen(
         }
         Row(
             Modifier
-                .height(50.dp)
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally),
-            horizontalArrangement = Arrangement.Center
+                .align(Alignment.CenterHorizontally)
+                .weight(1f),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             repeat(pages.size) { iteration ->
-                val color = if(pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
+                val color =
+                    if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
                 Box(
-                   modifier = Modifier
-                       .padding(2.dp)
-                       .clip(CircleShape)
-                       .background(color)
-                       .size(10.dp)
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(15.dp)
                 )
             }
         }
-        FinishButton(modifier = Modifier, pagerState = pagerState) {
+        FinishButton(modifier = Modifier.weight(1f), pagerState = pagerState) {
             onboardingScreenViewModel.saveOnBoardingState(completed = true)
             navController.popBackStack()
-            navController.navigate("home") {
-                popUpTo("boarding") {
+            navController.navigate(NavRoute.Home.route) {
+                popUpTo(NavRoute.OnBoarding.route) {
                     inclusive = true
                 }
             }
@@ -93,27 +100,36 @@ fun OnboardingScreen(
 @Composable
 fun PagerScreen(onBoardingPage: OnBoardingPage) {
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(id = onBoardingPage.image),
-            contentDescription = "App logo"
+            contentDescription = "App logo",
+            modifier = Modifier
+                .fillMaxWidth()
         )
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             text = onBoardingPage.title.asString(),
             textAlign = TextAlign.Center,
-            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-            fontWeight = FontWeight.Medium
+            fontSize = MaterialTheme.typography.titleLarge.fontSize,
+            fontWeight = FontWeight.Medium,
+            fontFamily = Roboto
         )
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(horizontal = 30.dp),
             text = onBoardingPage.description.asString(),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Justify,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Light,
+            fontFamily = Roboto
         )
     }
 }
@@ -128,7 +144,7 @@ fun FinishButton(
     Row(
         modifier = modifier
             .padding(horizontal = 40.dp),
-        verticalAlignment = Alignment.Top,
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(
@@ -147,28 +163,20 @@ fun FinishButton(
     }
 }
 
+@Preview(showSystemUi = true, device = Devices.DEFAULT)
 @Composable
-@Preview(showBackground = true)
-fun FirstOnBoardingScreenPreview() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        PagerScreen(onBoardingPage = OnBoardingPage.First)
-        PagerScreen(onBoardingPage = OnBoardingPage.Second)
+fun OnBoardingScreenPreviewMedium() {
+    TranslatorTheme {
+        val navController = rememberNavController()
+        OnboardingScreen(navController = navController)
     }
 }
 
+@Preview(showSystemUi = true, device = Devices.NEXUS_5)
 @Composable
-@Preview(showSystemUi = true)
-fun OnboardingScreenPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-
+fun OnBoardingScreenPreviewSmall() {
+    TranslatorTheme {
+        val navController = rememberNavController()
+        OnboardingScreen(navController = navController)
     }
 }
