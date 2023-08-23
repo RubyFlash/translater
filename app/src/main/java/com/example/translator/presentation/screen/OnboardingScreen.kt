@@ -88,7 +88,7 @@ fun OnboardingScreen(
         FinishButton(modifier = Modifier.weight(1f), pagerState = pagerState) {
             onboardingScreenViewModel.saveOnBoardingState(completed = true)
             navController.popBackStack()
-            navController.navigate(NavRoute.Home.route) {
+            navController.navigate(NavRoute.BottomNavigationBar.route) {
                 popUpTo(NavRoute.OnBoarding.route) {
                     inclusive = true
                 }

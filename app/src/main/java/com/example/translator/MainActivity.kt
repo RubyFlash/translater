@@ -3,6 +3,7 @@ package com.example.translator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
@@ -29,7 +30,9 @@ class MainActivity : ComponentActivity() {
             TranslatorTheme {
                 val screen by splashScreenViewModel.startDestination
                 val navController = rememberNavController()
-                SetupNavGraph(navController = navController, startDestination = screen)
+                Surface {
+                    SetupNavGraph(navController = navController, startDestination = screen)
+                }
             }
         }
     }
